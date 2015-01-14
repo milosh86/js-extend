@@ -20,55 +20,29 @@ var es5Extend = function extend(target) {
     return target;
 };
 
+// a little bit faster implementation - for loop instead of forEach. No arguments slice. Only valid if source has large number of properties. 
 var es5Extend2 = function extend(target) {
     if (typeof target != 'object')
         return target;
     
-    var sources = [].slice.call(arguments, 1),
-        i = 0,
-        n = sources.length,
+    //var sources = [].slice.call(arguments, 1),
+    var	i,
+        n = arguments.length,
         source,
         props,
         propsLen;
     
-    for(; i < n; i++){
-        source = sources[i];
-        props = source && Object.keys(source);
-        propsLen = props.length;
-        
-        while (propsLen && propsLen--) {
-            var key = props[propsLen];
-            target[key] = source[key];
-        }
-        
-    }
-    
-    
-    return target;
-};
-
-var es5Extend3 = function extend(target) {
-    if (typeof target != 'object')
-        return target;
-    
-    var sources = [].slice.call(arguments, 1),
-        i = 0,
-        n = sources.length,
-        source,
-        props,
-        propsLen;
-    
-    for(; i < n; i++){
-        source = sources[i];
+    for(i = 1; i < n; i++) {
+        source = arguments[i];
         if (source) {
           props = Object.keys(source);
         }
         else 
-          continue;
+          continue; //skip null and undefined
         
         propsLen = props.length;
         
-        for (var k = props.length-1; k >=0; k--) {
+        for (var k = 0; k < propsLen; k++) {
             var key = props[k];
             target[key] = source[key];
         }
