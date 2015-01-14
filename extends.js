@@ -3,13 +3,12 @@ var es5Extend = function extend(target) {
     if (typeof target != 'object') // typeof null === 'object'. Use _.isObject !!!!
         return target;
     
-    var sources = [].slice.call(arguments, 1),
-        i = 0,
-        n = sources.length,
+    var i,
+        n = arguments.length,
         source;
     
-    for(; i < n; i++){
-        source = sources[i];
+    for(i = 1; i < n; i++){
+        source = arguments[i];
         // filter null&undefiner source objects - breaks Object.keys
         source && Object.keys(source).forEach(function(key){
             target[key] = source[key];
@@ -20,12 +19,11 @@ var es5Extend = function extend(target) {
     return target;
 };
 
-// a little bit faster implementation - for loop instead of forEach. No arguments slice. Only valid if source has large number of properties. 
+// a little bit faster implementation - for loop instead of forEach. Only valid if source has large number of properties. 
 var es5Extend2 = function extend(target) {
     if (typeof target != 'object')
         return target;
     
-    //var sources = [].slice.call(arguments, 1),
     var	i,
         n = arguments.length,
         source,
