@@ -28,7 +28,9 @@ var es5Extend2 = function extend(target) {
         n = arguments.length,
         source,
         props,
-        propsLen;
+        propsLen,
+		k,
+		key;
     
     for(i = 1; i < n; i++) {
         source = arguments[i];
@@ -40,8 +42,8 @@ var es5Extend2 = function extend(target) {
         
         propsLen = props.length;
         
-        for (var k = 0; k < propsLen; k++) {
-            var key = props[k];
+        for (k = 0; k < propsLen; k++) {
+            key = props[k];
             target[key] = source[key];
         }
         
@@ -139,18 +141,6 @@ while (--n) {
 var end = performance.now();
 
 console.log('Time elapsed for ES5_2: %s', end-start);
-
-var start = performance.now();
-
-var n = 10000;
-while (--n) {
-    arguments[0]={};
-    es5Extend3.apply(null, arguments);
-}
-
-var end = performance.now();
-
-console.log('Time elapsed for ES5_3: %s', end-start);
 
 
 var start = performance.now();
