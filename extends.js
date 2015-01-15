@@ -109,14 +109,36 @@ var proto = {pprop1:1, pprop2:'protostring', pproto3: {a:'proto object'}};
 var o1 = Object.create(proto);
 
 var arguments = [{a:'base'}];
-
+/* many objects to merge
 for(var i = 0; i < 100; i++) {
     var o = Object.create(proto);
     o.a = 'added';
     o.b = i;
     arguments.push(o);
 }
-    
+*/  
+
+// low number of objects to merge
+for(var i = 0; i < 3; i++) {
+    var o = Object.create(proto);
+    o.a = 'added';
+    o.b = i;
+	o.c = {a:3,b:4};o.d = {a:3,b:4};
+	o.e = {a:3,b:4};o.f = {a:3,b:4};
+	o.g = {a:3,b:4};o.h = {a:3,b:4};
+	o.i = {a:3,b:4};o.j = {a:3,b:4};
+	o.k = {a:3,b:4};o.l = function() {};
+	o.m= function() {};	o.n= function() {};
+	o.o = function() {};o.p = function() {};
+	o.q = function() {};o.r = function() {};
+	o.s = function() {};o.t = 'added';
+	o.u = 'added';	o.v = 'added';
+	o.w = 'added';	o.x = 'added';
+	o.y = 'added';	o.z = 'added';
+	
+    arguments.push(o);
+}
+
 
 var start = performance.now();
 
@@ -154,6 +176,7 @@ while (--n) {
 var end = performance.now();
 
 console.log('Time elapsed for ES3: %s', end-start);
+
 
 
 var start = performance.now();
